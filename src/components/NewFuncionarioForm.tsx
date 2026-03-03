@@ -125,6 +125,9 @@ export function NewFuncionarioForm() {
             onSubmit={handleSubmit}
         >
             <div>
+              <h3>Informações básicas</h3>
+            </div>
+            <div>
                 <TextField
                     required
                     id="outlined-required"
@@ -152,6 +155,11 @@ export function NewFuncionarioForm() {
                     />
                     <Typography>Ativar ao criar</Typography>
                 </Stack>
+              </div>
+              <div>
+                <div>
+                  <h3>Informações profissionais</h3>
+                </div>
                 <TextField
                     select
                     label="Departamento"
@@ -171,14 +179,32 @@ export function NewFuncionarioForm() {
                         </MenuItem>
                     ))}
                 </TextField>
-            </div>
+              </div>
 
-            <Button variant="contained" color="primary" type="submit">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mt: 2
+              }}
+            >
+              <Button variant="outlined" onClick={() => navigate("/")}>
+                Voltar
+              </Button>
+
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                  backgroundColor: "#4fb66eff",
+                  fontSize: "8pt",
+                  fontWeight: 600,
+                  px: 3
+                }}
+              >
                 Cadastrar
-            </Button>
-            <Button variant="outlined" onClick={() => navigate("/")}>
-              Voltar
-            </Button>
+              </Button>
+            </Box>
         </Box>
     );
 }

@@ -10,6 +10,7 @@ import {
   Typography,
   Button,
   Box,
+  colors,
 } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
@@ -54,7 +55,7 @@ export function ListaFuncionarios() {
                 Colaboradores
             </Typography>
 
-            <Button variant="contained" onClick={() => navigate("/novo")}>
+            <Button variant="contained" onClick={() => navigate("/novo")} style={{ backgroundColor: '#4fb66eff', fontSize: '8pt', fontWeight: 600, padding: '10px' }}>
                 Novo Colaborador
             </Button>
         </Box>

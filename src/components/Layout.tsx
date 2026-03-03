@@ -1,6 +1,7 @@
-import { Box, Drawer, List, ListItemButton, ListItemText, Toolbar, Typography } from "@mui/material";
+import { Box, Drawer, List, ListItemButton, ListItemText, ListItemIcon, Toolbar, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
-
+import flugo from '../assets/img/flugo.png';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 const drawerWidth = 240;
 
 export function Layout() {
@@ -18,17 +19,16 @@ export function Layout() {
       >
         <Toolbar>
           <Typography variant="h6" noWrap>
-            Minha Empresa
+            <img src={flugo} alt="flugo" width={60} />
           </Typography>
         </Toolbar>
 
         <List>
           <ListItemButton onClick={() => navigate("/")}>
-            <ListItemText primary="Funcionários" />
-          </ListItemButton>
-
-          <ListItemButton onClick={() => navigate("/novo")}>
-            <ListItemText primary="Novo Funcionário" />
+            <ListItemIcon>
+              <AccountBoxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Colaborador  >" />
           </ListItemButton>
         </List>
       </Drawer>
