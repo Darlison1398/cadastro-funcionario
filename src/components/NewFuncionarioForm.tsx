@@ -51,9 +51,9 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
       color: '#fff',
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: '#1890ff',
+        backgroundColor: '#4fb66eff',
         ...theme.applyStyles('dark', {
-          backgroundColor: '#177ddc',
+          backgroundColor: '#4fb66eff',
         }),
       },
     },
@@ -80,6 +80,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 export function NewFuncionarioForm() {
     const navigate = useNavigate();
+    const [step, setStep] = useState(1);
     const [form, setForm] = useState<Funcionario>({
         nome: "",
         email: "",
@@ -118,93 +119,180 @@ export function NewFuncionarioForm() {
 
     return (
         <Box
-            component="form"
-            sx={{ '& .MuiTextField-root': { m: 1, width: '50ch' } }}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
+          component="form"
+          sx={{ '& .MuiTextField-root': { m: 1, width: '100ch', borderColor: "#4fb66eff" } }}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
         >
-            <div>
-              <h3>Informações básicas</h3>
-            </div>
-            <div>
+          {step === 1 && (
+            <>
+              <h1 style={{ color:"#8b8888ff", margin: "10px", fontFamily: "sans-serif"}}>Informações básicas</h1>
+
+              <Stack spacing={2}>
                 <TextField
-                    required
-                    id="outlined-required"
-                    label="Nome"
-                    name="nome"
-                    value={form.nome}
-                    onChange={handleChange}
-                    fullWidth
+                  required
+                  label="Nome"
+                  name="nome"
+                  value={form.nome}
+                  onChange={handleChange}
+                  fullWidth
+                  sx={{
+                    "& label.Mui-focused": {
+                      color: "#4fb66e",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                    },
+                  }}
                 />
+
                 <TextField
-                    required
-                    id="outlined-required"
-                    label="Email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    fullWidth
+                  required
+                  label="Email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  fullWidth
+                  sx={{
+                    "& label.Mui-focused": {
+                      color: "#4fb66e",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                    },
+                  }}
                 />
-                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', m: 1 }}>
-                    <AntSwitch
-                        checked={form.status === "Ativo"}
-                        onChange={(e) =>
-                        setForm({ ...form, status: e.target.checked ? "Ativo" : "Inativo" })
-                        }
-                    />
-                    <Typography>Ativar ao criar</Typography>
+
+                <Stack direction="row" spacing={1} sx={{ alignItems: "center"}}>
+                  <AntSwitch
+                    checked={form.status === "Ativo"}
+                    onChange={(e) =>
+                      setForm({ ...form, status: e.target.checked ? "Ativo" : "Inativo" })
+                    }
+                  />
+                  <Typography>Ativar ao criar</Typography>
                 </Stack>
-              </div>
-              <div>
-                <div>
-                  <h3>Informações profissionais</h3>
-                </div>
-                <TextField
-                    select
-                    label="Departamento"
-                    name="departamento"
-                    value={form.departamento || ""}
-                    onChange={handleChange}
-                    helperText="Selecione um departamento."
-                    fullWidth
-                    >
-                    <MenuItem value="">
-                        <em>Selecione…</em>
-                    </MenuItem>
 
-                    {departamento.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
-              </div>
+                <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                  <Button 
+                    variant="outlined" 
+                    onClick={() => navigate("/")}
+                    sx={{
+                      color: "grey.700",
+                      borderColor: "grey.400",
+                      "&:hover": {
+                        borderColor: "grey.600",
+                        backgroundColor: "grey.100",
+                      },
+                    }}
+                  >
+                    Voltar
+                  </Button>
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                mt: 2
-              }}
-            >
-              <Button variant="outlined" onClick={() => navigate("/")}>
-                Voltar
-              </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => setStep(2)}
+                    sx={{
+                      backgroundColor: "#4fb66eff",
+                      fontSize: "8pt",
+                      fontWeight: 600,
+                      px: 3,
+                    }}
+                  >
+                    Próximo
+                  </Button>
+                </Box>
+              </Stack>
+            </>
+          )}
+          {step === 2 && (
+            <>
+              <h3>Informações profissionais</h3>
 
-              <Button
-                variant="contained"
-                type="submit"
+              <TextField
+                select
+                label="Departamento"
+                name="departamento"
+                value={form.departamento || ""}
+                onChange={handleChange}
+                fullWidth
                 sx={{
-                  backgroundColor: "#4fb66eff",
-                  fontSize: "8pt",
-                  fontWeight: 600,
-                  px: 3
-                }}
+                    "& label.Mui-focused": {
+                      color: "#4fb66e",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#4fb66e",
+                      },
+                    },
+                  }}
               >
-                Cadastrar
-              </Button>
-            </Box>
+                <MenuItem value="">
+                  <em>Selecione um departamento</em>
+                </MenuItem>
+
+                {departamento.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                <Button 
+                  variant="outlined" 
+                  onClick={() => setStep(1)}
+                  sx={{
+                    color: "grey.700",
+                    borderColor: "grey.400",
+                    "&:hover": {
+                      borderColor: "grey.600",
+                      backgroundColor: "grey.100",
+                    },
+                  }}
+                >
+                  Voltar
+                </Button>
+
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    backgroundColor: "#4fb66eff",
+                    fontSize: "8pt",
+                    fontWeight: 600,
+                    px: 3,
+                  }}
+                >
+                  Cadastrar
+                </Button>
+              </Box>
+            </>
+          )}
+
         </Box>
     );
 }

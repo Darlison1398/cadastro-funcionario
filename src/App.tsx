@@ -2,15 +2,19 @@ import { Route, Routes } from 'react-router-dom'
 import { ListaFuncionarios } from './components/ListaFuncionarios'
 import { NewFuncionarioForm } from './components/NewFuncionarioForm'
 import { Layout } from './components/Layout'
+import { Padding } from '@mui/icons-material'
 
 function App() {
+
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<ListaFuncionarios />} />
-        <Route path="/novo" element={<NewFuncionarioForm />} />
-      </Route>
-    </Routes>
+    <div style={{ backgroundColor:"", padding: "2em"}}>
+      <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<ListaFuncionarios />} />
+            <Route path="/novo" element={<NewFuncionarioForm />} />
+          </Route>
+      </Routes>
+    </div>
 
   )
 }
