@@ -81,12 +81,32 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 export function NewFuncionarioForm() {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
+    
+    const [errors, setErrors] = useState({
+      nome: false,
+      email: false,
+    });
+
     const [form, setForm] = useState<Funcionario>({
         nome: "",
         email: "",
         departamento: "",
         status: "Ativo"
     });
+
+    function handleNextStep() {
+      const newErrors = {
+        nome: form.nome.trim() === "",
+        email: form.email.trim() === "",
+      };
+
+      setErrors(newErrors);
+
+      // Se existir algum erro, não avança
+      if (newErrors.nome || newErrors.email) return;
+
+      setStep(2);
+    }
 
     function handleChange(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -102,7 +122,7 @@ export function NewFuncionarioForm() {
     
         try {
           await addDoc(collection(db, "funcionarios"), form);
-          alert("Funcionário cadastrado com sucesso!");
+          //alert("Funcionário cadastrado com sucesso!");
     
           setForm({
             nome: "",
@@ -110,10 +130,20 @@ export function NewFuncionarioForm() {
             departamento: "",
             status: "Ativo"
           });
-          navigate("/");
+          navigate("/", {
+            state: {
+              message: "Funcionário cadastrado com sucesso!",
+              severity: "success",
+            },
+          });
+
         } catch (error) {
-          console.error(error);
-          alert("Erro ao cadastrar funcionário");
+          navigate("/", {
+            state: {
+              message: "Erro ao cadastrar funcionário",
+              severity: "error",
+            },
+          });
         }
     }
 
@@ -137,6 +167,8 @@ export function NewFuncionarioForm() {
                   value={form.nome}
                   onChange={handleChange}
                   fullWidth
+                  error={errors.nome}
+                  helperText={errors.nome ? "Nome é obrigatório" : ""}
                   sx={{
                     "& label.Mui-focused": {
                       color: "#4fb66e",
@@ -162,6 +194,8 @@ export function NewFuncionarioForm() {
                   value={form.email}
                   onChange={handleChange}
                   fullWidth
+                  error={errors.nome}
+                  helperText={errors.nome ? "Email é obrigatório" : ""}
                   sx={{
                     "& label.Mui-focused": {
                       color: "#4fb66e",
@@ -208,7 +242,7 @@ export function NewFuncionarioForm() {
 
                   <Button
                     variant="contained"
-                    onClick={() => setStep(2)}
+                    onClick={() => handleNextStep()}
                     sx={{
                       backgroundColor: "#4fb66eff",
                       fontSize: "8pt",

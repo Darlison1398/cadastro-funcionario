@@ -19,10 +19,16 @@ import type { Funcionario } from "../types/Funcionario";
 import { useNavigate } from "react-router-dom";
 import { Chip } from "@mui/material";
 import { Avatar, Stack } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export function ListaFuncionarios() {
   const navigate = useNavigate();
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const location = useLocation();
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState<"success" | "error">("success");
 
   async function buscarFuncionarios() {
     const snapshot = await getDocs(collection(db, "funcionarios"));
@@ -42,6 +48,14 @@ export function ListaFuncionarios() {
     buscarFuncionarios();
   }, []);
 
+  useEffect(() => {
+    if (location.state?.message) {
+        setAlertMessage(location.state.message);
+        setAlertSeverity(location.state.severity);
+        setAlertOpen(true);
+    }
+  }, [location.state]);
+
   return (
     <>
         <Box
@@ -53,6 +67,23 @@ export function ListaFuncionarios() {
                 mt: 3
             }}
             >
+                <Snackbar
+                    open={alertOpen}
+                    autoHideDuration={4000}
+                    onClose={() => setAlertOpen(false)}
+                    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                    >
+                    <Alert
+                        onClose={() => setAlertOpen(false)}
+                        severity={alertSeverity}
+                        variant="filled"
+                        sx={{ fontWeight: "bold" }}
+                    >
+                        {alertMessage}
+                    </Alert>
+                </Snackbar>
+
+
             <Typography variant="h6">
                 Colaboradores
             </Typography>
@@ -107,7 +138,7 @@ export function ListaFuncionarios() {
                                     }}
                                     >
                                     {f.nome.charAt(0).toUpperCase()}
-                                    </Avatar> &nbsp;
+                                    </Avatar> &nbsp;    
                                     {f.nome}
                                 </Stack>
                             </TableCell>
