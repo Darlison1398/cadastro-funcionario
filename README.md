@@ -36,13 +36,19 @@ npm install   ou   yarn install
 
 ## 4️⃣ Configurar o Firebase
 No arquivo "firebase.ts", que está na pasta src/services/firebase.ts, adicione as configurações do firebase ("Você deve criar um banco no firebase e obter as chaves de conexão").
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_AUTH_DOMAIN",
+  projectId: "SEU_PROJECT_ID",
+  storageBucket: "SEU_STORAGE_BUCKET",
+  messagingSenderId: "SEU_SENDER_ID",
+  appId: "SEU_APP_ID"
+};
+ ** Basta substituir os nomes entre as aspas "" pelas chaves geradas no seu banco criado no Firebase.
+ 
+## 5️⃣ Rodar o projeto
+npm run dev
 
- "" apiKey: "SUA_API_KEY",
-    authDomain: "SEU_AUTH_DOMAIN",
-    projectId: "SEU_PROJECT_ID",
-    storageBucket: "SEU_STORAGE_BUCKET",
-    messagingSenderId: "SEU_SENDER_ID",
-    appId: "SEU_APP_ID"
-  ""
+sua aplicação estará disponível no navegador através do link: http://localhost:5173
 
 
