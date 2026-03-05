@@ -26,7 +26,7 @@ Além dos requisitos solicitados no desafio, foram adicionadas funcionalidades e
 
 # 📦 Como rodar o projeto localmente
 ## 1️⃣ Clonar o repositório
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone git@github.com:Darlison1398/cadastro-funcionario.git
 
 ## 2️⃣ Acessar a pasta do projeto
 cd nome-do-repositorio
