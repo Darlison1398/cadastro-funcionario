@@ -125,7 +125,12 @@ export function ListaFuncionarios() {
 
                 <TableBody>
                     {funcionarios.map((f) => (
-                        <TableRow key={f.id}>
+                        <TableRow 
+                            key={f.id} 
+                            hover
+                            onClick={() => navigate(`/funcionario/${f.id}`)}
+                            sx={{ cursor: "pointer" }}
+                        >
                             <TableCell>
                                 <Stack direction="row" spacing={1} alignItems="center">
                                     <Avatar
