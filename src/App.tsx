@@ -1,8 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
-import { ListaFuncionarios } from './components/ListaFuncionarios'
-import { NewFuncionarioForm } from './components/NewFuncionarioForm'
-import { Layout } from './components/Layout'
-import { Padding } from '@mui/icons-material'
+import { ListaFuncionarios } from './pages/ListaFuncionarios'
+import { NewFuncionarioForm } from './pages/NewFuncionarioForm'
+import { Layout } from './pages/Layout'
 
 function App() {
 
