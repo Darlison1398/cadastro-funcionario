@@ -15,3 +15,34 @@ Além dos requisitos solicitados no desafio, foram adicionadas funcionalidades e
 - Listagem de funcionários cadastrados
 - ✏️ Edição de funcionários
 - 🗑️ Exclusão de funcionários
+
+# 🛠 Tecnologias utilizadas
+- React
+- TypeScript
+- Material UI
+- Firebase (Firestore)
+- Vite
+- Axios
+
+# 📦 Como rodar o projeto localmente
+## 1️⃣ Clonar o repositório
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
+
+## 2️⃣ Acessar a pasta do projeto
+cd nome-do-repositorio
+
+## 3️⃣ Instalar as dependências
+npm install   ou   yarn install
+
+## 4️⃣ Configurar o Firebase
+No arquivo "firebase.ts", que está na pasta src/services/firebase.ts, adicione as configurações do firebase ("Você deve criar um banco no firebase e obter as chaves de conexão").
+
+ "" apiKey: "SUA_API_KEY",
+    authDomain: "SEU_AUTH_DOMAIN",
+    projectId: "SEU_PROJECT_ID",
+    storageBucket: "SEU_STORAGE_BUCKET",
+    messagingSenderId: "SEU_SENDER_ID",
+    appId: "SEU_APP_ID"
+  ""
+
+
