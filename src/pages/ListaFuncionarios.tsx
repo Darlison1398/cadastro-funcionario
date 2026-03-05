@@ -96,7 +96,7 @@ export function ListaFuncionarios() {
             <Table>
                 <TableHead
                     sx={{
-                        backgroundColor: "rgba(0, 0, 0, 0.05)", // cinza transparente
+                        backgroundColor: "rgba(0, 0, 0, 0.05)", 
                     }}
                 >
                     <TableRow>

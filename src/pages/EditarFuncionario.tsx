@@ -47,8 +47,6 @@ export function EditarFuncionario() {
     e.preventDefault();
 
     if (!id) return;
-
-    //await updateDoc(doc(db, "funcionarios", id), form);
     await updateDoc(doc(db, "funcionarios", id), { ...form });
 
     navigate("/", {
