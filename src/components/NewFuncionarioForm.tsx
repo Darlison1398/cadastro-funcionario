@@ -7,6 +7,8 @@ import { collection } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { useNavigate } from "react-router-dom";
 import { Button, MenuItem, Stack, styled, Switch, Typography } from '@mui/material';
+import { LinearProgress } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const departamento = [
     {
@@ -121,9 +123,7 @@ export function NewFuncionarioForm() {
         e.preventDefault();
     
         try {
-          await addDoc(collection(db, "funcionarios"), form);
-          //alert("Funcionário cadastrado com sucesso!");
-    
+          await addDoc(collection(db, "funcionarios"), form);    
           setForm({
             nome: "",
             email: "",
@@ -147,18 +147,103 @@ export function NewFuncionarioForm() {
         }
     }
 
+    const progress = step === 1 ? 50 : 100;
+    function StepIndicatorVertical({ step }: { step: number }) {
+      return (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            {step > 1 ? (
+              <CheckCircleIcon sx={{ color: "#4fb66e" }} />
+            ) : (
+              <Box
+                sx={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: "50%",
+                  backgroundColor: "#4fb66e",
+                  color: "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 12,
+                  fontWeight: "bold",
+                }}
+              >
+                1
+              </Box>
+            )}
+            <Typography fontWeight="bold">Infos Básicas</Typography>
+          </Box>
+
+          {/* ETAPA 2 */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Box
+              sx={{
+                width: 24,
+                height: 24,
+                borderRadius: "50%",
+                backgroundColor: step === 2 ? "#4fb66e" : "#ccc",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 12,
+                fontWeight: "bold",
+              }}
+            >
+              2
+            </Box>
+            <Typography fontWeight="bold">Infos Profissionais</Typography>
+          </Box>
+        </Box>
+      );
+    }
+
     return (
         <Box
           component="form"
-          sx={{ '& .MuiTextField-root': { m: 1, width: '100ch', borderColor: "#4fb66eff" } }}
+          sx={{ '& .MuiTextField-root': { m: 1, width: '100ch', borderColor: "#4fb66eff", display: "flex", gap:"4"} }}
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit}
         >
+          <Box sx={{ mb: 3}}>
+            <Box sx={{ display: "flex", gap:"20px" }}>
+              <Typography variant="caption" color="text.secondary" >
+                Colaboradores *
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Cadastrar Colaborador
+              </Typography>
+            </Box>
+
+            <LinearProgress
+              variant="determinate"
+              value={progress}
+              sx={{
+                height: 8,
+                borderRadius: 5,
+                mt: 1,
+                backgroundColor: "#e0e0e0",
+                "& .MuiLinearProgress-bar": {
+                  backgroundColor: "#4fb66e",
+                },
+              }}
+            />
+
+            <Typography
+              variant="caption"
+              sx={{ display: "block", textAlign: "right", mt: 0.5 }}
+            >
+              {progress}%
+            </Typography>
+          </Box>
+          
+
           {step === 1 && (
             <>
+              <StepIndicatorVertical step={step} />
               <h1 style={{ color:"#8b8888ff", margin: "10px", fontFamily: "sans-serif"}}>Informações básicas</h1>
-
               <Stack spacing={2}>
                 <TextField
                   required
@@ -257,8 +342,9 @@ export function NewFuncionarioForm() {
             </>
           )}
           {step === 2 && (
-            <>
-              <h3>Informações profissionais</h3>
+            <> 
+              <StepIndicatorVertical step={step} />
+              <h3 style={{ color:"#8b8888ff", margin: "10px", fontFamily: "sans-serif"}}>Informações profissionais</h3>
 
               <TextField
                 select
@@ -326,7 +412,6 @@ export function NewFuncionarioForm() {
               </Box>
             </>
           )}
-
         </Box>
     );
 }
