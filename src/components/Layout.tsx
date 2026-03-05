@@ -2,6 +2,8 @@ import { Box, Drawer, List, ListItemButton, ListItemText, ListItemIcon, Toolbar,
 import { Outlet, useNavigate } from "react-router-dom";
 import flugo from '../assets/img/flugo.png';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 const drawerWidth = 240;
 
 export function Layout() {
@@ -28,7 +30,10 @@ export function Layout() {
             <ListItemIcon>
               <AccountBoxIcon />
             </ListItemIcon>
-            <ListItemText primary="Colaborador  >" />
+            <ListItemText primary="Colaborador" />
+            <ListItemIcon sx={{ display: "flex", justifyContent:"end" }}>
+              <ChevronRightIcon />
+            </ListItemIcon>
           </ListItemButton>
         </List>
       </Drawer>

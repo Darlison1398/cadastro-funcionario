@@ -150,7 +150,7 @@ export function NewFuncionarioForm() {
     const progress = step === 1 ? 50 : 100;
     function StepIndicatorVertical({ step }: { step: number }) {
       return (
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "6em", width: "240px"}}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             {step > 1 ? (
               <CheckCircleIcon sx={{ color: "#4fb66e" }} />
@@ -172,10 +172,8 @@ export function NewFuncionarioForm() {
                 1
               </Box>
             )}
-            <Typography fontWeight="bold">Infos Básicas</Typography>
+            <Typography>Infos Básicas</Typography>
           </Box>
-
-          {/* ETAPA 2 */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Box
               sx={{
@@ -193,7 +191,7 @@ export function NewFuncionarioForm() {
             >
               2
             </Box>
-            <Typography fontWeight="bold">Infos Profissionais</Typography>
+            <Typography>Infos Profissionais</Typography>
           </Box>
         </Box>
       );
@@ -202,7 +200,9 @@ export function NewFuncionarioForm() {
     return (
         <Box
           component="form"
-          sx={{ '& .MuiTextField-root': { m: 1, width: '100ch', borderColor: "#4fb66eff", display: "flex", gap:"4"} }}
+          sx={{ 
+            '& .MuiTextField-root': { m: 1, width: '80ch', borderColor: "#4fb66eff" }
+          }}
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit}
@@ -238,180 +238,187 @@ export function NewFuncionarioForm() {
               {progress}%
             </Typography>
           </Box>
-          
 
-          {step === 1 && (
-            <>
-              <StepIndicatorVertical step={step} />
-              <h1 style={{ color:"#8b8888ff", margin: "10px", fontFamily: "sans-serif"}}>Informações básicas</h1>
-              <Stack spacing={2}>
-                <TextField
-                  required
-                  label="Nome"
-                  name="nome"
-                  value={form.nome}
-                  onChange={handleChange}
-                  fullWidth
-                  error={errors.nome}
-                  helperText={errors.nome ? "Nome é obrigatório" : ""}
-                  sx={{
-                    "& label.Mui-focused": {
-                      color: "#4fb66e",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                    },
-                  }}
-                />
+          <Box sx={{ display: "flex", gap: 4 }}>
+            <StepIndicatorVertical step={step} />
+            <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
 
-                <TextField
-                  required
-                  label="Email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  fullWidth
-                  error={errors.nome}
-                  helperText={errors.nome ? "Email é obrigatório" : ""}
-                  sx={{
-                    "& label.Mui-focused": {
-                      color: "#4fb66e",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                    },
-                  }}
-                />
+              {step === 1 && (
+                <>
+                  <Typography variant="h6" sx={{ color:"#8b8888" }}>
+                    Informações básicas
+                  </Typography>
+                  <Stack spacing={2}>
+                    <TextField
+                      required
+                      label="Nome"
+                      name="nome"
+                      value={form.nome}
+                      onChange={handleChange}
+                      fullWidth
+                      error={errors.nome}
+                      helperText={errors.nome ? "Nome é obrigatório" : ""}
+                      sx={{
+                        "& label.Mui-focused": {
+                          color: "#4fb66e",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                        },
+                      }}
+                    />
 
-                <Stack direction="row" spacing={1} sx={{ alignItems: "center"}}>
-                  <AntSwitch
-                    checked={form.status === "Ativo"}
-                    onChange={(e) =>
-                      setForm({ ...form, status: e.target.checked ? "Ativo" : "Inativo" })
-                    }
-                  />
-                  <Typography>Ativar ao criar</Typography>
-                </Stack>
+                    <TextField
+                      required
+                      label="Email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      fullWidth
+                      error={errors.email}
+                      helperText={errors.nome ? "Email é obrigatório" : ""}
+                      sx={{
+                        "& label.Mui-focused": {
+                          color: "#4fb66e",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                        },
+                      }}
+                    />
 
-                <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-                  <Button 
-                    variant="outlined" 
-                    onClick={() => navigate("/")}
+                    <Stack direction="row" spacing={1} sx={{ alignItems: "center"}}>
+                      <AntSwitch
+                        checked={form.status === "Ativo"}
+                        onChange={(e) =>
+                          setForm({ ...form, status: e.target.checked ? "Ativo" : "Inativo" })
+                        }
+                      />
+                      <Typography>Ativar ao criar</Typography>
+                    </Stack>
+
+                    <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                      <Button 
+                        variant="outlined" 
+                        onClick={() => navigate("/")}
+                        sx={{
+                          color: "grey.700",
+                          borderColor: "grey.400",
+                          "&:hover": {
+                            borderColor: "grey.600",
+                            backgroundColor: "grey.100",
+                          },
+                        }}
+                      >
+                        Voltar
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        onClick={() => handleNextStep()}
+                        sx={{
+                          backgroundColor: "#4fb66eff",
+                          fontSize: "8pt",
+                          fontWeight: 600,
+                          px: 3,
+                        }}
+                      >
+                        Próximo
+                      </Button>
+                    </Box>
+                  </Stack>
+                </>
+              )}
+              {step === 2 && (
+                <> 
+                  <Typography variant="h6" sx={{ color:"#8b8888" }}>
+                    Informações Profissionais
+                  </Typography>
+
+                  <TextField
+                    select
+                    label="Departamento"
+                    name="departamento"
+                    value={form.departamento || ""}
+                    onChange={handleChange}
+                    fullWidth
                     sx={{
-                      color: "grey.700",
-                      borderColor: "grey.400",
-                      "&:hover": {
-                        borderColor: "grey.600",
-                        backgroundColor: "grey.100",
-                      },
-                    }}
+                        "& label.Mui-focused": {
+                          color: "#4fb66e",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                          "&.Mui-focused fieldset": {
+                            borderColor: "#4fb66e",
+                          },
+                        },
+                      }}
                   >
-                    Voltar
-                  </Button>
+                    <MenuItem value="">
+                      <em>Selecione um departamento</em>
+                    </MenuItem>
 
-                  <Button
-                    variant="contained"
-                    onClick={() => handleNextStep()}
-                    sx={{
-                      backgroundColor: "#4fb66eff",
-                      fontSize: "8pt",
-                      fontWeight: 600,
-                      px: 3,
-                    }}
-                  >
-                    Próximo
-                  </Button>
-                </Box>
-              </Stack>
-            </>
-          )}
-          {step === 2 && (
-            <> 
-              <StepIndicatorVertical step={step} />
-              <h3 style={{ color:"#8b8888ff", margin: "10px", fontFamily: "sans-serif"}}>Informações profissionais</h3>
+                    {departamento.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
 
-              <TextField
-                select
-                label="Departamento"
-                name="departamento"
-                value={form.departamento || ""}
-                onChange={handleChange}
-                fullWidth
-                sx={{
-                    "& label.Mui-focused": {
-                      color: "#4fb66e",
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                      "&:hover fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "#4fb66e",
-                      },
-                    },
-                  }}
-              >
-                <MenuItem value="">
-                  <em>Selecione um departamento</em>
-                </MenuItem>
+                  <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                    <Button 
+                      variant="outlined" 
+                      onClick={() => setStep(1)}
+                      sx={{
+                        color: "grey.700",
+                        borderColor: "grey.400",
+                        "&:hover": {
+                          borderColor: "grey.600",
+                          backgroundColor: "grey.100",
+                        },
+                      }}
+                    >
+                      Voltar
+                    </Button>
 
-                {departamento.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-                <Button 
-                  variant="outlined" 
-                  onClick={() => setStep(1)}
-                  sx={{
-                    color: "grey.700",
-                    borderColor: "grey.400",
-                    "&:hover": {
-                      borderColor: "grey.600",
-                      backgroundColor: "grey.100",
-                    },
-                  }}
-                >
-                  Voltar
-                </Button>
-
-                <Button
-                  variant="contained"
-                  type="submit"
-                  sx={{
-                    backgroundColor: "#4fb66eff",
-                    fontSize: "8pt",
-                    fontWeight: 600,
-                    px: 3,
-                  }}
-                >
-                  Cadastrar
-                </Button>
-              </Box>
-            </>
-          )}
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      sx={{
+                        backgroundColor: "#4fb66eff",
+                        fontSize: "8pt",
+                        fontWeight: 600,
+                        px: 3,
+                      }}
+                    >
+                      Cadastrar
+                    </Button>
+                  </Box>
+                </>
+              )}
+            </Box>
+          </Box>
         </Box>
     );
 }

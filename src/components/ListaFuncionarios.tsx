@@ -84,7 +84,7 @@ export function ListaFuncionarios() {
                 </Snackbar>
 
 
-            <Typography variant="h6">
+            <Typography variant="h6" sx={{ color:"#3f3d3dff", fontWeight: 600 }}>
                 Colaboradores
             </Typography>
 
